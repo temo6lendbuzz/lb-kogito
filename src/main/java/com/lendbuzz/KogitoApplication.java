@@ -15,8 +15,10 @@
  */
 package com.lendbuzz;
 
+import org.kie.dmn.api.core.event.DMNRuntimeEventListener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication(scanBasePackages={"com.lendbuzz.**", "org.kie.kogito.**", "http**"})
 public class KogitoApplication {
@@ -25,4 +27,8 @@ public class KogitoApplication {
         SpringApplication.run(KogitoApplication.class, args);
     }
 
+    @Bean
+    public DMNRuntimeEventListener versionDecisionEventListener() {
+        return new DecisionExecutionEventListener();
+    }
 }
